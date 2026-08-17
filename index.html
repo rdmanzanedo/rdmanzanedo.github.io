@@ -1,404 +1,885 @@
-<!DOCTYPE HTML>
-<!--
-	Spectral by HTML5 UP
--->
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-	<title>Forest Ecology Lab - University of Bern</title>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-	
-	<link rel="stylesheet" href="assets/css/main.css" />
-	<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Forest Ecology Lab — University of Bern</title>
+<meta name="description" content="The Forest Ecology Lab at the Institute of Plant Sciences, University of Bern, studies how forest populations respond to environmental change across temporal, spatial and developmental scales.">
+<link rel="icon" href="images/favicon.ico">
 
-	<!-- Added -->
-	<link rel="icon" href="images/favicon.ico">
+<meta property="og:title" content="Forest Ecology Lab — University of Bern">
+<meta property="og:description" content="How forest populations respond to environmental change, across temporal, spatial and developmental scales.">
+<meta property="og:image" content="images/Group_picture.jpeg">
+<meta property="og:type" content="website">
 
-	<style>
-		/* ===== TOP NAVIGATION ===== */
-		#header {
-			position: fixed;
-			top: 0;
-			width: 100%;
-			background: rgba(0,0,0,0.85);
-			z-index: 1000;
-			padding: 10px 0;
-		}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
 
-		#header nav ul {
-			display: flex;
-			justify-content: center;
-			gap: 2em;
-			list-style: none;
-			margin: 0;
-			padding: 0;
-		}
+<script>document.documentElement.className += ' js';</script>
 
-		#header nav a {
-			color: white;
-			text-decoration: none;
-			font-weight: 600;
-		}
+<style>
+/* ============================================================
+   TOKENS — palette from a conifer cross-section
+   ============================================================ */
+:root{
+  --paper:      #ffffff;   /* style5 */
+  --paper-2:    #f4f7f7;
+  --ink:        #2e3842;   /* style2 */
+  --ink-soft:   #4E4852;
+  --canopy:     #21b2a6;   /* style1 */
+  --canopy-2:   #1c9a90;
+  --indigo:     #505393;   /* style3 */
+  --indigo-soft:#d3d4e4;
+  --amber:      #21b2a6;   /* accent on light */
+  --amber-lift: #7fded4;   /* accent on dark */
+  --lichen:     #a6e0db;
+  --rule:       rgba(46,56,66,.16);
 
-		body {
-			padding-top: 80px;
-		}
+  --f-display: "Open Sans", Helvetica, Arial, sans-serif;
+  --f-body:    "Open Sans", Helvetica, Arial, sans-serif;
+  --f-label:   "Open Sans", Helvetica, Arial, sans-serif;
 
-		/* ===== IMAGE CONSISTENCY ===== */
-		.image img {
-			width: 100%;
-			height: auto;
-			display: block;
-			border-radius: 6px;
-		}
+  --header-h: 66px;
+  --pad: clamp(1.25rem, 4vw, 3rem);
+  --gap: clamp(3rem, 7vw, 5.5rem);
+  --measure: 68ch;
+}
 
-		/* ===== READABILITY (no content change) ===== */
-		.wrapper .inner {
-			max-width: 1000px;
-			margin: auto;
-		}
-	</style>
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--f-body);
+  font-size:clamp(1rem,.96rem + .2vw,1.075rem);line-height:1.65;letter-spacing:.075em;
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;height:auto;display:block}
+a{color:var(--canopy);text-decoration-thickness:1px;text-underline-offset:.18em}
+a:hover{color:var(--indigo)}
+:focus-visible{outline:2.5px solid var(--amber);outline-offset:3px;border-radius:2px}
+
+h1,h2,h3,h4{font-family:var(--f-display);font-weight:800;line-height:1.2;margin:0}
+h2{font-size:clamp(1.6rem,1.15rem + 1.9vw,2.5rem);letter-spacing:.18em;text-transform:uppercase}
+h3{font-size:1.2rem;font-weight:700;letter-spacing:.1em}
+p{margin:0 0 1em}
+p:last-child{margin-bottom:0}
+
+.wrap{width:min(1180px,100% - var(--pad)*2);margin-inline:auto}
+.eyebrow{
+  font-family:var(--f-label);font-size:.72rem;font-weight:600;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--amber);
+  margin:0 0 .9rem;display:block;
+}
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+.site-header{
+  position:fixed;inset:0 0 auto 0;z-index:100;height:var(--header-h);
+  display:flex;align-items:center;transition:background .3s ease,box-shadow .3s ease;
+}
+.site-header::before{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,0));
+  transition:opacity .3s ease;
+}
+.site-header.is-stuck{background:rgba(255,255,255,.94);backdrop-filter:blur(10px);box-shadow:0 1px 0 var(--rule)}
+.site-header.is-stuck::before{opacity:0}
+.site-header .wrap{display:flex;align-items:center;justify-content:space-between;gap:1rem;position:relative}
+
+.brand{font-family:var(--f-display);font-size:1.02rem;font-weight:600;color:#fff;text-decoration:none;white-space:nowrap;opacity:0;transition:opacity .3s ease}
+.brand em{font-style:italic;color:var(--amber-lift)}
+.is-stuck .brand{color:var(--ink);opacity:1}
+
+.nav ul{display:flex;gap:1.55rem;list-style:none;margin:0;padding:0}
+.nav a{
+  font-family:var(--f-label);font-size:.74rem;letter-spacing:.09em;text-transform:uppercase;
+  color:rgba(255,255,255,.88);text-decoration:none;padding:.4rem 0;position:relative;
+}
+.is-stuck .nav a{color:var(--ink-soft)}
+.nav a::after{
+  content:"";position:absolute;left:0;right:0;bottom:0;height:1.5px;background:var(--amber-lift);
+  transform:scaleX(0);transform-origin:left;transition:transform .25s ease;
+}
+.nav a:hover::after,.nav a[aria-current="true"]::after{transform:scaleX(1)}
+.nav a:hover,.nav a[aria-current="true"]{color:#fff}
+.is-stuck .nav a:hover,.is-stuck .nav a[aria-current="true"]{color:var(--amber)}
+
+.nav-toggle{display:none;background:none;border:0;cursor:pointer;padding:.5rem;color:#fff}
+.is-stuck .nav-toggle{color:var(--ink)}
+.nav-toggle svg{width:26px;height:26px}
+
+@media (max-width:920px){
+  .brand{opacity:1}
+  .nav-toggle{display:block}
+  .nav{
+    position:absolute;top:calc(var(--header-h) - 8px);right:0;
+    background:var(--paper-2);border:1px solid var(--rule);border-radius:10px;
+    padding:.75rem .25rem;min-width:195px;box-shadow:0 18px 40px rgba(46,56,66,.2);display:none;
+  }
+  .nav[data-open="true"]{display:block}
+  .nav ul{flex-direction:column;gap:0}
+  .nav a{display:block;padding:.62rem 1.1rem;color:var(--ink-soft)}
+  .nav a::after{display:none}
+}
+
+/* ============================================================
+   BANNER — Spectral's original: slate curtain lifts off the photo,
+   title scales up between two rules that grow from opposite corners,
+   "Learn more" slides in last.
+   ============================================================ */
+.banner{
+  position:relative;display:flex;flex-direction:column;justify-content:center;
+  height:100svh;min-height:35em;overflow:hidden;cursor:default;
+  text-align:center;color:#fff;background:var(--ink);
+  padding:var(--header-h) var(--pad) 0;
+}
+.banner__media{position:absolute;inset:0}
+.banner__media img{width:100%;height:100%!important;object-fit:cover;object-position:center 55%}
+.banner__media::after{content:"";position:absolute;inset:0;background:rgba(0,0,0,.5)}
+
+/* the curtain that lifts to reveal the photo */
+.banner::after{
+  content:"";position:absolute;inset:0;pointer-events:none;z-index:2;
+  background:var(--ink);opacity:0;
+  transition:opacity 3s ease-in-out;transition-delay:1.25s;
+}
+.banner__inner{position:relative;z-index:1;max-width:46em;margin-inline:auto}
+
+.banner__logo{
+  width:min(230px,52vw);height:auto;margin:0 auto 1.75rem;
+  opacity:1;transform:scale(1);
+  transition:transform .8s ease,opacity .8s ease;
+  filter:drop-shadow(0 4px 22px rgba(0,0,0,.45));
+}
+
+.banner h1{
+  display:inline-block;position:relative;z-index:1;
+  font-size:clamp(1.5rem,.95rem + 2.4vw,2.6rem);font-weight:800;
+  letter-spacing:.225em;text-transform:uppercase;line-height:1.3;
+  padding:.35em 1em .45em;margin:0 0 1.5rem;
+  opacity:1;transform:scale(1);
+  transition:transform .5s ease,opacity .5s ease;
+}
+.banner h1::before,.banner h1::after{
+  content:"";display:block;position:absolute;height:2px;width:100%;background:#fff;
+  transition:width .85s ease;transition-delay:.25s;
+}
+.banner h1::before{top:0;left:0}
+.banner h1::after{bottom:0;right:0}
+
+.banner__sub{
+  letter-spacing:.225em;text-transform:uppercase;
+  font-size:clamp(.62rem,.55rem + .3vw,.78rem);
+  color:rgba(255,255,255,.82);margin:0 0 1.4rem;
+}
+.banner__contact{font-size:.92rem;letter-spacing:.1em;margin:0 0 2rem;color:rgba(255,255,255,.9)}
+.banner__contact a{color:inherit;text-decoration:none;border-bottom:dotted 1px rgba(255,255,255,.6)}
+.banner__contact a:hover{color:var(--lichen);border-bottom-color:var(--lichen)}
+.banner__unibe{width:112px;height:auto;margin:0 auto;opacity:.92;filter:drop-shadow(0 2px 10px rgba(0,0,0,.4))}
+
+.banner__more{
+  position:absolute;left:50%;bottom:0;z-index:2;width:16em;margin-left:-8em;height:8.5em;
+  display:flex;flex-direction:column;align-items:center;gap:1.1em;padding-top:1.6em;
+  color:#fff;text-decoration:none;border:none;outline:0;
+  font-size:.8rem;letter-spacing:.225em;text-transform:uppercase;
+  opacity:1;transform:translateY(0);
+  transition:transform .75s ease,opacity .75s ease;transition-delay:3.5s;
+}
+.banner__more svg{width:1.5em;height:1.5em;animation:nudge 2.6s ease-in-out infinite}
+@keyframes nudge{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
+.banner__more:hover{color:var(--lichen)}
+
+/* pre-load state — every transition above runs from here */
+.is-preload .banner::after{opacity:1}
+.is-preload .banner h1{transform:scale(.95);opacity:0}
+.is-preload .banner h1::before,.is-preload .banner h1::after{width:0}
+.is-preload .banner__logo{transform:scale(.9);opacity:0}
+.is-preload .banner__more{transform:translateY(8.5em);opacity:0}
+
+@media (max-width:736px){
+  .banner{height:auto;min-height:0;padding:9em 2em 5em}
+  .banner__more{display:none}
+}
+
+/* ============================================================
+   BANDS
+   ============================================================ */
+section[id]{scroll-margin-top:calc(var(--header-h) + 10px)}
+.band{padding-block:var(--gap)}
+.band--tint{background:var(--paper-2);border-block:1px solid var(--rule)}
+.band--dark{background:var(--indigo);color:var(--indigo-soft)}
+.band--dark h2,.band--dark h3{color:var(--paper)}
+.band--dark a{color:var(--amber-lift)}
+.band--dark .eyebrow{color:var(--lichen)}
+
+.section-head{margin-bottom:clamp(2.2rem,4vw,3.4rem);max-width:var(--measure)}
+.section-head--center{margin-inline:auto;text-align:center}
+.section-head h2{margin-bottom:.7rem}
+.section-head p{color:var(--ink-soft)}
+.band--dark .section-head p{color:rgba(255,255,255,.75)}
+
+.deferred{content-visibility:auto;contain-intrinsic-size:auto 1000px}
+
+/* ============================================================
+   SPOTLIGHT — full-bleed photo beside a colour panel
+   ============================================================ */
+.spotlight{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);align-items:stretch}
+.spotlight--flip .spotlight__media{order:2}
+.spotlight__media{position:relative;min-height:clamp(320px,46vw,660px)}
+.spotlight__media img{position:absolute;inset:0;width:100%;height:100%!important;object-fit:cover}
+.spotlight__body{padding:clamp(2.25rem,5.5vw,5rem);display:flex;flex-direction:column;justify-content:center}
+.spotlight--green .spotlight__body{background:var(--canopy);color:rgba(255,255,255,.86)}
+.spotlight--green h2,.spotlight--green h3{color:#fff}
+.spotlight--green a{color:var(--amber-lift)}
+.spotlight--green .eyebrow{color:var(--lichen)}
+.spotlight--ink .spotlight__body{background:var(--ink);color:rgba(255,255,255,.8)}
+.spotlight--ink h2,.spotlight--ink h3{color:#fff}
+.spotlight--ink a{color:var(--amber-lift)}
+.spotlight--ink .eyebrow{color:var(--lichen)}
+.spotlight--paper .spotlight__body{background:var(--paper-2)}
+.spotlight__body > *{max-width:60ch}
+
+@media (max-width:900px){
+  .spotlight{grid-template-columns:1fr}
+  .spotlight--flip .spotlight__media{order:0}
+  .spotlight__media{min-height:56vw;max-height:420px}
+}
+
+.pledge{
+  border-left:3px solid var(--amber-lift);background:rgba(255,255,255,.07);
+  padding:1.1rem 1.35rem;margin-top:1.75rem;border-radius:0 4px 4px 0;
+}
+.pledge p{font-size:.97rem;color:#fff}
+
+.link-out{
+  display:inline-flex;align-items:center;gap:.5rem;margin-top:1rem;
+  font-family:var(--f-label);font-size:.78rem;letter-spacing:.04em;
+  text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:2px;
+}
+.link-out::after{content:"→";transition:transform .2s ease}
+.link-out:hover::after{transform:translateX(3px)}
+
+/* ============================================================
+   NEWS — the increment core
+   ============================================================ */
+.core{list-style:none;margin:0;padding:0 0 0 clamp(2.6rem,5vw,3.4rem);position:relative}
+.core::before{
+  content:"";position:absolute;left:clamp(.65rem,1.6vw,1.1rem);top:.4rem;bottom:.4rem;width:13px;border-radius:7px;
+  background:repeating-linear-gradient(180deg,#D6BA8C 0px 19px,#63441A 19px 21px,#EAD9B6 21px 26px,#553A12 26px 29px,#DFC79B 29px 43px,#71501F 43px 47px,#DFC79B 47px 54px,#553A12 54px 56px,#E2CBA2 56px 68px,#63441A 68px 70px,#D6BA8C 70px 88px,#553A12 88px 90px,#E9D7B2 90px 104px,#553A12 104px 106px,#DCC194 106px 111px,#553A12 111px 113px,#E7D2A9 113px 123px,#5C3E15 123px 126px,#D6BA8C 126px 137px,#5C3E15 137px 139px,#DCC194 139px 166px,#63441A 166px 168px,#DFC79B 168px 180px,#7A5624 180px 182px,#EAD9B6 182px 187px,#6B4A1C 187px 190px,#E9D7B2 190px 209px,#71501F 209px 212px,#E9D7B2 212px 222px,#7A5624 222px 225px,#EAD9B6 225px 244px,#71501F 244px 247px,#E7D2A9 247px 263px,#7A5624 263px 266px,#DFC79B 266px 275px,#71501F 275px 277px,#E9D7B2 277px 304px,#71501F 304px 306px,#DCC194 306px 314px,#63441A 314px 318px,#E2CBA2 318px 345px,#71501F 345px 347px,#E2CBA2 347px 360px,#553A12 360px 362px,#E9D7B2 362px 381px,#5C3E15 381px 383px,#E2CBA2 383px 397px,#71501F 397px 399px,#E9D7B2 399px 406px,#63441A 406px 408px,#E9D7B2 408px 427px,#7A5624 427px 429px,#E2CBA2 429px 436px,#71501F 436px 439px,#DFC79B 439px 450px,#63441A 450px 453px,#EAD9B6 453px 458px,#63441A 458px 460px,#E2CBA2 460px 465px,#6B4A1C 465px 467px,#EAD9B6 467px 486px,#5C3E15 486px 489px,#E2CBA2 489px 510px,#553A12 510px 513px,#E9D7B2 513px 526px,#5C3E15 526px 530px,#E9D7B2 530px 537px,#71501F 537px 540px,#D6BA8C 540px 547px,#63441A 547px 549px,#E9D7B2 549px 563px,#6B4A1C 563px 565px,#EAD9B6 565px 574px,#6B4A1C 574px 577px,#E7D2A9 577px 581px,#7A5624 581px 584px,#E9D7B2 584px 592px,#71501F 592px 594px,#E9D7B2 594px 613px,#71501F 613px 615px,#EAD9B6 615px 619px,#71501F 619px 621px,#E9D7B2 621px 637px,#5C3E15 637px 639px,#DCC194 639px 648px,#7A5624 648px 651px,#E9D7B2 651px 663px,#63441A 663px 666px,#DCC194 666px 675px,#7A5624 675px 679px,#D6BA8C 679px 691px,#6B4A1C 691px 693px,#DCC194 693px 712px,#63441A 712px 716px,#E2CBA2 716px 725px,#5C3E15 725px 727px,#EAD9B6 727px 739px,#71501F 739px 742px,#E2CBA2 742px 769px,#63441A 769px 773px,#DFC79B 773px 786px,#5C3E15 786px 789px,#D6BA8C 789px 807px,#5C3E15 807px 809px,#D6BA8C 809px 820px,#71501F 820px 823px,#E2CBA2 823px 831px,#6B4A1C 831px 835px,#DCC194 835px 854px,#553A12 854px 856px,#DFC79B 856px 861px,#63441A 861px 863px,#DCC194 863px 870px,#63441A 870px 874px,#E7D2A9 874px 890px,#63441A 890px 893px);
+  box-shadow:inset 0 0 0 1px rgba(46,56,66,.25);
+}
+.core li{position:relative;padding-bottom:2.8rem}
+.core li:last-child{padding-bottom:0}
+.core li::before{
+  content:"";position:absolute;
+  left:calc(clamp(2.6rem,5vw,3.4rem) * -1 + clamp(.65rem,1.6vw,1.1rem) - 5px);
+  top:.15rem;width:23px;height:23px;border-radius:50%;
+  background:var(--paper);border:2.5px solid #6B4A1C;
+}
+.core li.has-card::before{background:var(--ink);border-color:var(--amber-lift)}
+.core time{font-family:var(--f-label);font-size:.76rem;letter-spacing:.05em;color:var(--amber);display:block;margin-bottom:.35rem}
+.core h3{margin-bottom:.5rem;max-width:44ch}
+.core p{color:var(--ink-soft);max-width:var(--measure)}
+.core figure{margin:1.1rem 0 0}
+.core figure img{border-radius:5px;aspect-ratio:21/9;object-fit:cover;width:100%}
+.news-featured{background:var(--ink);color:var(--paper);border-radius:6px;padding:clamp(1.4rem,3vw,2.1rem)}
+.news-featured h3{color:var(--paper)}
+.news-featured time{color:var(--amber-lift)}
+.news-featured p{color:rgba(255,255,255,.78)}
+
+/* ============================================================
+   PEOPLE
+   ============================================================ */
+.people{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:clamp(1.75rem,3vw,2.75rem);list-style:none;margin:0;padding:0}
+.person__portrait,.person__portrait--initials{width:148px;aspect-ratio:1;border-radius:50%}
+.person__portrait{object-fit:cover;box-shadow:0 0 0 1px var(--rule),0 0 0 8px var(--paper),0 0 0 9px rgba(33,178,166,.4)}
+.person__portrait--initials{
+  display:grid;place-items:center;background:var(--canopy);color:var(--paper);
+  font-family:var(--f-display);font-size:2rem;font-weight:700;letter-spacing:.06em;
+  box-shadow:0 0 0 8px var(--paper),0 0 0 9px rgba(33,178,166,.4);
+}
+.person h3{margin:1.35rem 0 .15rem}
+.person .role{font-family:var(--f-label);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);display:block;margin-bottom:.7rem}
+.person p{font-size:.94rem;color:var(--ink-soft)}
+
+.alumni{margin-top:clamp(2.75rem,5vw,4rem);padding-top:2rem;border-top:1px solid var(--rule)}
+.alumni ul{list-style:none;margin:1.25rem 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.5rem}
+.alumni li{font-size:.94rem;color:var(--ink-soft)}
+.alumni strong{color:var(--ink);display:block;font-family:var(--f-display);font-size:1.02rem;font-weight:600}
+.alumni .years{font-family:var(--f-label);font-size:.72rem;color:var(--amber);letter-spacing:.05em}
+
+/* ============================================================
+   RESEARCH
+   ============================================================ */
+.projects{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:clamp(1.75rem,3vw,2.5rem);list-style:none;margin:0;padding:0}
+.project{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);border-radius:6px;overflow:hidden;display:flex;flex-direction:column}
+.project__figure{margin:0;position:relative}
+.project__figure img{width:100%;aspect-ratio:16/9;object-fit:cover}
+.project__figure::after{content:"";position:absolute;inset:0;background:linear-gradient(rgba(46,56,66,0) 55%,rgba(46,56,66,.55))}
+.project__text{padding:clamp(1.5rem,3vw,2rem)}
+.project__icon{width:34px;height:34px;color:var(--amber-lift);margin-bottom:1rem}
+.project h3{margin-bottom:.8rem}
+.project p{font-size:.95rem;color:var(--indigo-soft)}
+.project__strip{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-top:auto}
+.project__strip img{width:100%;aspect-ratio:4/3;object-fit:cover}
+
+/* ============================================================
+   PUBLICATIONS
+   ============================================================ */
+.pubs__year{display:flex;align-items:center;gap:1rem;margin:2.5rem 0 1.2rem}
+.pubs__year:first-child{margin-top:0}
+.pubs__year h3{font-family:var(--f-label);font-size:.95rem;font-weight:600;letter-spacing:.14em;color:var(--amber)}
+.pubs__year::after{content:"";flex:1;height:1px;background:var(--rule)}
+.pubs ul{list-style:none;margin:0;padding:0}
+.pubs li{font-size:.92rem;line-height:1.6;padding:.55rem 0 .55rem 1.5rem;position:relative;color:var(--ink-soft);max-width:100ch}
+.pubs li::before{content:"";position:absolute;left:0;top:1.15em;width:7px;height:7px;border-radius:50%;border:1.5px solid var(--lichen)}
+.pubs .journal{color:var(--ink);font-style:italic}
+.pubs .self{font-weight:700;color:var(--ink)}
+.pubs .status{font-family:var(--f-label);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--amber);margin-left:.4rem}
+
+/* ============================================================
+   TEACHING
+   ============================================================ */
+.teaching h3{margin-bottom:.9rem}
+.teaching h3 + h3{margin-top:2rem}
+.teaching ul{list-style:none;margin:0;padding:0}
+.teaching li{padding:.55rem 0;border-bottom:1px solid rgba(255,255,255,.16);display:flex;justify-content:space-between;gap:1.5rem;font-size:.95rem}
+.teaching .years{font-family:var(--f-label);font-size:.75rem;color:var(--amber-lift);white-space:nowrap;padding-top:.15rem}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.site-footer{background:var(--ink);color:rgba(255,255,255,.72);padding-block:clamp(3rem,6vw,4.5rem) 2rem;font-size:.9rem}
+.footer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:2.5rem;align-items:start}
+.site-footer h4{color:var(--paper);font-family:var(--f-label);font-size:.74rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;margin-bottom:1rem}
+.site-footer a{color:var(--amber-lift)}
+.site-footer img{width:96px;height:auto;opacity:.85}
+.colophon{margin-top:3rem;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.14);font-size:.78rem;color:rgba(255,255,255,.5);display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between}
+
+/* ============================================================
+   MOTION — page-load intro, then gentle scroll fades
+   ============================================================ */
+.js .reveal{opacity:0}
+.js .reveal.in{opacity:1;transition:opacity .55s ease}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .js .reveal{opacity:1;transition:none}
+  .banner::after{opacity:0!important;transition:none}
+  .banner h1,.banner__logo,.banner__more{opacity:1!important;transform:none!important;transition:none}
+  .banner h1::before,.banner h1::after{width:100%!important;transition:none}
+  .banner__more svg{animation:none}
+  *{animation-duration:.01ms !important;transition-duration:.01ms !important}
+}
+
+@media print{
+  .site-header,.banner__more,.banner__media{display:none}
+  body{background:#fff;color:#000}
+  .band--dark,.spotlight--green .spotlight__body,.spotlight--ink .spotlight__body{background:#fff;color:#000}
+}
+</style>
 </head>
 
-<body class="landing is-preload">
+<body class="is-preload">
 
-<div id="page-wrapper">
+<header class="site-header" id="siteHeader">
+  <div class="wrap">
+    <a class="brand" href="#home">Forest <em>Ecology</em> Lab</a>
 
-	<!-- NEW NAVBAR -->
-	<header id="header" class="alt">
-		<nav>
-			<ul>
-				<li><a href="#banner" class="scrolly">Home</a></li>
-				<li><a href="#one" class="scrolly">About</a></li>
-				<li><a href="#one-a" class="scrolly">News</a></li>
-				<li><a href="#two" class="scrolly">People</a></li>
-				<li><a href="#three" class="scrolly">Research</a></li>
-				<li><a href="#four" class="scrolly">Publications</a></li>
-			</ul>
-		</nav>
-	</header>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="primaryNav" aria-label="Open menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+        <path d="M4 7h16M4 12h16M4 17h16"/>
+      </svg>
+    </button>
 
-	<!-- Banner -->
-	<section id="banner">
-		<div class="inner">
-			<img src="images/Fellab3_s.png" width="250"/>
-			<br />
-			<br />
-			<h2>Forest Ecology Lab </h2>
-			<p>Forest Ecology Lab at the University of Bern
-				
-			Current contact: 
-			<a href="mailto:ruben.manzanedo@unibe.ch">ruben.manzanedo@unibe.ch</a></p>
-			<br />
-			
-			<br />
-			<img src="images/unibelogo.png" width="150"/>
-			<br />
+    <nav class="nav" id="primaryNav" aria-label="Primary">
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#news">News</a></li>
+        <li><a href="#people">People</a></li>
+        <li><a href="#research">Research</a></li>
+        <li><a href="#publications">Publications</a></li>
+        <li><a href="#teaching">Teaching</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
 
-		</div>
-		<a href="#one" class="more scrolly">Learn More</a>
-	</section>
+<main>
 
-					<section id="one" class="wrapper style1 special">
-						<div class="inner">
-							<header class="major">
-								
-								
-								<h2>Welcome!<br />
-									
-								</h2>
-								<br />
-								<div class="image">
-								  <img src="images/Group_picture.jpeg" alt="" style="width: 100%; height: auto;" />
-								</div>
-								<br />
-								<p>This is the website of the Forest Ecology Lab at the <a href="https://www.ips.unibe.ch/">Institute of Plant Sciences</a> of the University of Bern. 
-								</p>
-								
-								<p>The Forest Ecology Lab started their first steps in September 2024, founded by Rubén D. Manzanedo, Assistant Professor at UniBe. </p>
-								<p>
-								The group studies how forest populations respond to and are affected by environmental change acrosss temporal, spatial, and developmental scales. This remains one of the most 
-								pressing challenges in comprehending the effects of climate change on forests worldwide. We work across scales: from local
-								 to global, across ecosystems, and approaches. Repeated inventories, dendrochronological approaches, big open data, and citizen-science data are the
-								 common tools that we use to gain unique perspectives and ecological insights that pushes the boundaries of forest ecology. 
-								</p>
-								<p><b>Celebrating diversity and tolerance is a priority for the Forest Lab. All cultures, gender and sexual identities are very welcome in the group. Discrimination or bigotry of any kind are not!</b></p>
-								<p>We are a group of ecologists and foresters passionate about science, diverse, active and welcoming, trying to better understand Global Forest's responses to their environment. </p>								
-								Current projects of the group center in the use of big tree-ring data to assess long-term responses of forest to environmental change, 
-								assessing and improving long-term data quality for open databases globally, and investigating changes in environmental requirements across tree development. <br />
-							
-								</p>
-							
-						</div>
-					</section>
+<!-- ============================ BANNER ============================ -->
+<section class="banner" id="home">
+  <div class="banner__media">
+    <img src="images/banner.jpg" alt="" fetchpriority="high" decoding="async">
+  </div>
 
-					<section id="one-a" class="wrapper style1 special">
-						<div class="inner">
-							<header class="major">
-								<h2>News! (2026)<br />
-								</h2>
-								<hr>
-								<p> (23.05.2026) Regeneration Niche paper available!</p>
-								<p> In the most recent work of the group, we modelled the environmental requirements of juveniles and adults of 43 tree species around Switzerland using the Swiss National Forest Inventory. 
-									We showed remarkable niche stability across scales and higher resilience of forest to climate change based in their demographic flexibility. Check the paper here! : 
-								</p>
-								<a href="https://besjournals.onlinelibrary.wiley.com/doi/full/10.1111/1365-2745.70338"> https://besjournals.onlinelibrary.wiley.com/doi/full/10.1111/1365-2745.70338 </a>
-								<hr>
-								<p> (21.04.2026) Opening PhD position!</p>
-								<p> A new phd position co-supervised by the group is now open (short deadline! check it out!). If you are interested in long-term forest research, population ecology, the effects of diversity and forest management, this is a great chance! 3 years of assured funded</p>
-								<a href="https://www.jobbnorge.no/en/available-jobs/job/299149/phd-research-fellow-in-ecology"> https://www.jobbnorge.no/en/available-jobs/job/299149/phd-research-fellow-in-ecology </a>
-								<hr>
-								<p> (20.04.2026) Fieldwork in Spain completed!</p>
-								<p> The team has been very busy last weeks completing the fieldwork in Spanish forests. More than 25 new plots across the Iberian Peninsula and some of the coolests forests in the Mediterranean!</p>
-								<div class="image"><img src="images/view_Asturias.JPG" alt="" /></div>
-								<hr>
-								<p> (10.04.2026) New accepted publication. Regeneration Niche!</p>
-								<p> In this new paper of the group, we explore how the juvenile and adult niches vary across tree species in Switzerland using Swiss National Forest Inventory: More info comming soon!</p>
-								<hr>
-								<p> (01.04.2026) Justin Harden gets a ThinkSwiss grant for his project</p>
-								<p>Congratulations to Justin for this great achievement. Jusstin will join the group for the summer 2026 to work on Micro XRF dendrocrhonology and the ecological importance of autoflorescence structures in tree physiology! <a href="https://treefunctionlab.weebly.com/people.html"> https://treefunctionlab.weebly.com/people.html </a></p>
-								
-								<hr>
-								<p> (30.01.2026) Will longer growing seasons increase tree growth consistently across populations?</p>
-								<p>In this new paper of the group, we discuss why this may not be the case and how we should go about finding out this extremely complex question. Read more here: <a href="https://www.nature.com/articles/s41558-025-02476-x"> https://www.nature.com/articles/s41558-025-02476-x </a></p>
-								<hr>
+  <div class="banner__inner">
+    <img class="banner__logo" src="images/Fellab3_s.png" alt="Forest Ecology Lab" width="1095" height="1092" fetchpriority="high">
+    <h1>Forest Ecology Lab</h1>
+    <p class="banner__sub">Institute of Plant Sciences &middot; University of Bern</p>
+    <p class="banner__contact">Contact: <a href="mailto:ruben.manzanedo@unibe.ch">ruben.manzanedo@unibe.ch</a></p>
+    <img class="banner__unibe" src="images/unibelogo.png" alt="University of Bern" width="755" height="582" decoding="async">
+  </div>
 
+  <a class="banner__more" href="#about">
+    Learn more
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M12 4v15M5 13l7 7 7-7"/>
+    </svg>
+  </a>
+</section>
 
-								
+<!-- ============================ ABOUT ============================ -->
+<section id="about">
+  <div class="spotlight spotlight--green">
+    <div class="spotlight__media">
+      <img src="images/Group_picture.jpeg" alt="Members of the Forest Ecology Lab together in the field" loading="lazy" decoding="async">
+    </div>
+    <div class="spotlight__body reveal">
+      <span class="eyebrow">Welcome</span>
+      <h2>A lab built around long-term forest data</h2>
+      <p style="margin-top:1.4rem">
+        This is the site of the Forest Ecology Lab at the
+        <a href="https://www.ips.unibe.ch/">Institute of Plant Sciences</a>, University of Bern. The group
+        took its first steps in September 2024, founded by Rubén D. Manzanedo, Assistant Professor at UniBe.
+      </p>
+      <p>
+        We study how forest populations respond to, and are affected by, environmental change across
+        temporal, spatial and developmental scales — still one of the most pressing open problems in
+        understanding what climate change does to forests worldwide. We work from local to global, across
+        ecosystems and approaches. Repeated inventories, dendrochronology, large open datasets and
+        citizen-science records are the tools we use to reach insight that pushes at the edges of forest ecology.
+      </p>
+      <p>
+        Current projects centre on using big tree-ring data to assess long-term forest responses to
+        environmental change, improving long-term data quality for open databases globally, and tracking
+        how environmental requirements shift across tree development.
+      </p>
+      <div class="pledge">
+        <p><strong>Diversity and tolerance are a priority for this lab.</strong> All cultures, genders and
+        sexual identities are very welcome in the group. Discrimination and bigotry of any kind are not.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-								
-							
-						</div>
-					</section>
-				<!-- Two -->
-					<section id="two" class="wrapper alt style2">
-						<section class="spotlight">
-							<div class="content">
-													
-								<center>
-								<h2>PEOPLE:<br /> 
-								
+<!-- ============================ NEWS ============================ -->
+<section class="band band--tint deferred" id="news">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">2026</span>
+      <h2>News</h2>
+      <p>Read from the outside in, like a core: the most recent ring first.</p>
+    </div>
 
-								</h2>
-								<div class="image"><img src="images/Profile_Ruben_Manzanedo.JPG" alt="" /></div> <br />
-								<p><b>Rubén D. Manzanedo (PI) </b><br />
-									Rubén is currently Assisstant Professor at the Institute of Plant Sciences, in the University of Bern, Switzerland. Rubén is interested in how forested
-									ecosystems respond to changes in their environment across scales. Rubén did his BSc and MSc in Forestry and Global Change at the University of Córdoba in Spain, and his 
-									PhD in Tree Local Adaptation at the University of Bern. After doing postdocs in Harvard University, University of Washington and ETH-Zürich, Rubén 
-									currently leads the FEL group.
-								 
-								</p>
+    <ol class="core">
+      <li class="has-card reveal">
+        <div class="news-featured">
+          <time datetime="2026-08-17">17.08.2026</time>
+          <h3>Open postdoc position</h3>
+          <p>
+            We are looking for a postdoc to join the group. If you work on long-term forest research,
+            large-scale data analysis, or diversity and stability across European forests, we would like to
+            hear from you. Two years, with possible extension depending on funding.
+          </p>
+          <a class="link-out" href="images/Postdoc%20Position%20Bern.pdf">Download the position flyer (PDF)</a>
+        </div>
+      </li>
 
-								<div class="image"><img src="images/Profile_zabdi.jpg" alt="" /></div> <br />
+      <li class="reveal">
+        <time datetime="2026-08-06">06.08.2026</time>
+        <h3>New paper in <em>Nature Climate Change</em></h3>
+        <p>
+          Co-authored by the group: we combined tree-ring records from 45 species — over 120,000 trees —
+          with global range-shift observations and hydraulic trait data. A species' hydraulic strategy
+          predicts which way it moves under warming: climate-sensitive species track warming upslope,
+          while stress-resistant ones expand downslope.
+        </p>
+        <a class="link-out" href="https://www.nature.com/articles/s41558-026-02726-6">Read the paper</a>
+      </li>
 
-								<p><b>Zabdi López (PhD Student)</b> <br />
-									Zabdi is currently a PhD student a the University of Bern within the OpenRing project. Zabdi is interested in long-term open forest data, and tree 
-									responses to climate change across Europe. Zabdi did his MSc studies in Guatemala and Norway and joined the FEL group in November 2024.</p>
-								<div class="image"><img src="images/Profile_Miriam.jpg" alt="" /></div> <br />
+      <li class="reveal">
+        <time datetime="2026-05-23">23.05.2026</time>
+        <h3>Regeneration niche paper is out</h3>
+        <p>
+          We modelled the environmental requirements of juveniles and adults of 43 tree species across
+          Switzerland using the Swiss National Forest Inventory, and found remarkable niche stability across
+          life stages — pointing to higher forest resilience to climate change through demographic flexibility.
+        </p>
+        <a class="link-out" href="https://besjournals.onlinelibrary.wiley.com/doi/full/10.1111/1365-2745.70338">Read the paper</a>
+      </li>
 
-								<p><b>Miriam Frutiger (Technician)</b><br />
-									Miriam is currently the group technical support, both in the field and at the lab. Miriam's interests include forest ecology, insect ecology, and art. She did 
-								her BSc at the University of Bern and has since joined in a wide range of projects and interests at the Institute of Plant Sciences.</p>
-								
-								<div class="image"><img src="images/Profile_JiajiaSu.jpg" alt="" /></div> <br />
-								
-								<p><b>Jiajia Su (Visiting Postdoc)</b><br />
-									JiaJia is a visiting Postdoctoral Researcher from Sun Yat-Sen University. Jiajia works with macroecological responses to climate change in subtropical forests in China. 
-								Jiajia Studies long-term responees, changing populatioon dynamics and is interested in the importance of soil and drought for Asian subtropical forests. 
-								More about Jiajia <a href="https://scholar.google.com/citations?user=lUIl3v0AAAAJ&hl=zh-CN">HERE </a> </p> <br />
-							
-								<p><b> Cecilia Hofman (PhD student at WSL)</b><br />
-									Cecilia Hofmann’s PhD explores how climate change alters the physiological performance of European mountain tree species. 
-									Combining tree-ring isotope analyses with experimental studies across elevational gradients in major European mountain ranges, her work identifies species-specific thresholds to support climate-adaptive and resilient forest management.
-								More about Cecilia <a href="https://www.oeschger.unibe.ch/about_us/people/personalpage/index_eng.html?id=943">HERE </a> </p> <br />
+      <li class="reveal">
+        <time datetime="2026-04-20">20.04.2026</time>
+        <h3>Fieldwork in Spain completed</h3>
+        <p>
+          Busy weeks in Spanish forests: more than 25 new plots across the Iberian Peninsula, including some
+          of the finest forests in the Mediterranean.
+        </p>
+        <figure><img src="images/view_Asturias.JPG" alt="Forested valley in Asturias, northern Spain" loading="lazy" decoding="async"></figure>
+      </li>
 
-								<p><b> Nora Bisang (MSc)</b><br />
-									Nora’s MSc thesis investigates the variability of climate change responses among dominant European tree species. Her research compares climate vulnerability across different populations of the same species throughout Europe,
-									while also examining how local factors, such as within-population competition and environmental context, influence forest population responses to increasing climate stress.  	
-								 </p> <br />
+      <li class="reveal">
+        <time datetime="2026-04-01">01.04.2026</time>
+        <h3>Justin Harden wins a ThinkSwiss grant</h3>
+        <p>
+          Congratulations to Justin. He joins the group for summer 2026 to work on micro-XRF dendrochronology
+          and the ecological role of autofluorescent structures in tree physiology.
+        </p>
+        <a class="link-out" href="https://treefunctionlab.weebly.com/people.html">Justin's lab page</a>
+      </li>
 
-								<p><b> Patricia Martínez Soler (BSc)</b><br />
-									Patricia’s BSc thesis explores the relationship between biodiversity, ecosystem stability, and site characteristics, with a particular focus on understory vegetation and age-class variability. Her research aims to refine 
-									the conceptual links between ecological characteristics and forest population resilience.<br />
-																			
-								<p>FORMER GROUP MEMBERS:<br />
-									<i><b>Giacomo Colasurdo (visiting student form the University of Milano - 2024)</b></i> Giacomo's project centers on the analysis and collection of ecological metadata related to forest responses to climate change.
-									<br />
-								<p><i>Savannah Goetsch (MSc - 2024-2025)<i></i><br />
-										Savannah's MSc Thesis explored the regeneration niche of main Swiss tree species using repeated inventory data from Swiss NFI data, in collaboration with WSL.</p><br />
-								<p><b>Matteo Trachsel (BSc)</b><br />
-										Matteo's BSc Thesis will look at patterns of heavy metal deposition within tree rings in Switzerland. </p>
-									</center>	
-								</p>
-							</div>
-							
-						</section>
-					</section>
+      <li class="reveal">
+        <time datetime="2026-01-30">30.01.2026</time>
+        <h3>Will longer growing seasons increase tree growth everywhere?</h3>
+        <p>Probably not — and in this paper we set out why, and how the field might go about answering a question this tangled.</p>
+        <a class="link-out" href="https://www.nature.com/articles/s41558-025-02476-x">Read the paper</a>
+      </li>
+    </ol>
+  </div>
+</section>
 
-					<!-- Three -->
-					<section id="three" class="wrapper style3 special">
-						<div class="inner">
-							<header class="major">
-								<center>
-									<h2>SOME CURRENTLY HIGHLIGHTED RESEARCH</h2>
-								</center>
-								<p>These are some of the projects our group is working on at the moment. See past work down in the CV section</p>
-							</header>
-							<ul class="features">
-								
-								<li class="icon solid fa-code">
-									<h3>Big Long Term Ecological Data</h3>
-									<p>This ERC Starting project, now transfered to a SNSF Starting Grant aims to improve the representativity and availability of long term tree growth data 
-										across European forest populations.</p>
-										<p>	<i class="icon solid fa-pen"> </i> This project, started in September 2024 builds on our <a href="https://onlinelibrary.wiley.com/doi/abs/10.1111/jbi.13488"> work </a> harmonizing the largest dendrochronological databases and 
-										developing methods to proactively reduce its biases over time and improve our understanding of big ecological databases' strenght and limitations.</p>
-											
-											<div style="text-align: center">
-											<img src="images/pic12.jpg" width="300"></p>
-											</div>
-									
-										<p><i class="icon solid fa-pen"> </i> More info here soon</p>
-										<p>See the group's most recent publication in this topic: <a href="https://www.sciencedirect.com/science/article/abs/pii/S0048969724074011"> HERE </a> </p>
-								</li>
-								<li class="icon solid fa-tree">
-									<h3>Regeneration Niche</h3>
-									<p>How do trees change their environmental requirements as they grow? What does it imply for forest population responses to climate change?</p>
-									<p>	<i class="icon solid fa-pen"> </i> Check our <a href="https://besjournals.onlinelibrary.wiley.com/doi/full/10.1111/1365-2745.14254"> work </a> led by Kristiina Viskorpi, exploring the synergies and trade offs between adaptation to multiple extremes
-									and their comparison between modelled and experimental tolerances to extremes across European tree species.</p>
-									
-									<div style="text-align: center">
-									<img src="images/pic06.jpg" width="150"></p>
-									</div>
+<!-- ============================ PEOPLE ============================ -->
+<section class="band deferred" id="people">
+  <div class="wrap">
+    <div class="section-head section-head--center reveal">
+      <span class="eyebrow">Who we are</span>
+      <h2>People</h2>
+    </div>
 
-									<p><i class="icon solid fa-pen"> </i> Manzanedo et al. (In Review). This work, still being reviewed, systematically models the habitat of 42 species across 30 years of forest inventory data in Switzerland, to
-										explore the generality of ontogenetic niche shifts.	</p>
-										<div style="text-align: center">
-											<img src="images/pic07.jpg" width="200"></p>
-											</div>
+    <ul class="people">
+      <li class="person reveal">
+        <img class="person__portrait" src="images/Profile_Ruben_Manzanedo.JPG" alt="Rubén D. Manzanedo" loading="lazy" decoding="async" width="148" height="148">
+        <h3>Rubén D. Manzanedo</h3>
+        <span class="role">Principal investigator</span>
+        <p>Assistant Professor at the Institute of Plant Sciences, University of Bern. Rubén works on how forested ecosystems respond to environmental change across scales. BSc and MSc in Forestry and Global Change at the University of Córdoba, PhD in tree local adaptation at Bern, then postdocs at Harvard, the University of Washington and ETH Zürich.</p>
+      </li>
 
-									
-								</li>
-								<li class="icon solid fa-seedling">
-									<h3>Alpine Phenology</h3>
-									<p>How do the phenology of alpine flower communities respond to a warmer climate? How can that affect their provision of key ecosystem services, such as 
-										visitation experience to Protected Areas?</p>
-										<p><i class="icon solid fa-pen"></i> Check our <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8976009/"> work </a> using Citizen-Science data from Mount Rainier National Park</p>
-										<div style="text-align: center">
-											<img src="images/pic08.jpg" width="250"></p>
-											</div>
-										<p><i class="icon solid fa-laptop"></i> <a href="http://www.meadowatch.org/">More info </a> on the long-term project MeadowWatch, led by Prof. Janneke Hille Ris Lambers</p>
-										<div style="text-align: center">
-											<img src="images/Combined.png" width="100"></p>
-											</div>
+      <li class="person reveal">
+        <img class="person__portrait" src="images/Profile_zabdi.jpg" alt="Zabdi López" loading="lazy" decoding="async" width="148" height="148">
+        <h3>Zabdi López</h3>
+        <span class="role">PhD student</span>
+        <p>Zabdi works within the OpenRing project on long-term open forest data and tree responses to climate change across Europe. He studied in Guatemala and Norway, and joined the lab in November 2024.</p>
+      </li>
 
-								</li>
-								<li class="icon solid fa-clock">
-									<h3>Tree population Phenology and Climate Change</h3>
-									<p>How will early growing seasons influence forest responses to climate? Does the extended growing season compensate for the increase in temperature and aridity across global ecosystems?</p>
-									<p><i class="icon solid fa-pen"></i> Check our <a href="https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2018JG004882"> work </a>, led by Xianliang Zhang, which started this line of  
-									research in the group. We showed that rising temperatures promote boreal forest growth but that this is likely a temporal response, turning negative as permafrost
-								further degrades.</p>
-									<div style="text-align: center">
-										<img src="images/pic09.jpg" width="250"></p>
-										</div>
-									
-									<p><i class="icon solid fa-pen"></i> More recently, the <a href="https://www.nature.com/articles/s41467-023-39057-5"> work </a> led by Wenqing Li, developed new methods to address 
-									increasing temperatures and shifting growing season in the highly-variable boreal systems, showing a much higher than expected sensitivity to drougth when this was accounted for.</p>
-											<div style="text-align: center">
-												<img src="images/pic10.jpg" width="250"></p>
-												</div>
-									<p><i class="icon solid fa-pen"></i> Currently, the Grephon team, led by Lizzie Wolkovich is working on a review paper aiming to organize and harmonize our undersanding of the relationship between
-										earlier and longer growing seasons and tree growth.</p>
-											<div style="text-align: center">
-												<img src="images/pic11.jpg" width="250"></p>
-												</div>
-								
-								
-								</li>
+      <li class="person reveal">
+        <img class="person__portrait" src="images/Profile_Miriam.jpg" alt="Miriam Frutiger" loading="lazy" decoding="async" width="148" height="148">
+        <h3>Miriam Frutiger</h3>
+        <span class="role">Technician</span>
+        <p>Miriam provides the group's technical support in the field and in the lab. Her interests span forest ecology, insect ecology and art. She did her BSc at Bern and has since worked across a wide range of projects at the Institute of Plant Sciences.</p>
+      </li>
 
+      <li class="person reveal">
+        <img class="person__portrait" src="images/Profile_JiajiaSu.jpg" alt="Jiajia Su" loading="lazy" decoding="async" width="148" height="148">
+        <h3>Jiajia Su</h3>
+        <span class="role">Visiting postdoc</span>
+        <p>Visiting from Sun Yat-sen University, Jiajia works on macroecological responses to climate change in Chinese subtropical forests: long-term responses, shifting population dynamics, and the role of soil and drought. <a href="https://scholar.google.com/citations?user=lUIl3v0AAAAJ&amp;hl=zh-CN">Publications</a>.</p>
+      </li>
 
-							</ul>
-						</div>
-					</section>
-						
-						
-					<section id="four" class="wrapper alt style2">
-						<section class="spotlight">
-							<div class="image"><img src="images/pic02.jpg" alt="" /></div><div class="content">
-								<center>
-									<h2>HIGHLIGHTED GROUP PUBLICATIONS<br /> </h2>
-								</center>
-								<br />
-								<center><h4>2026</h4></center>
-								<p style="font-size: 70%;">- Su J, Zheng W, Gou X, Hille Ris Lambers J, Altman J, Wang Y, Chu C, Zuidema P, Gu F, & Manzanedo RD. 2026. Bedrock lithology determines forest demographic responses to drought. Nature Communications. Accepted</p>
-								<p style="font-size: 70%;">- Manzanedo RD, Visakorpi K, Bieger A, Temperli C, Portier J, Göestch S, & Hille Ris Lambers J. 2026. High climatic niche stability across Life Stages in Swiss forest tree species. Journal of Ecology. Accepted</p>
-								<p style="font-size: 70%;">- Hille Ris Lambers J, Bektas B, Torres A, Manzanedo RD, & Feeley K. 2026. Elevational range shifts of trees in response to a changing climate. Annual Reviews in Ecology Evolution and Systematics. Accepted</p>
-								<p style="font-size: 70%;">- Wu Y, Rademacher T, Liu H, Manzanedo RD, Boyi Lian, Yu S, Guo Z, Du M, & Zhang X. 2026. Balancing individual growth and stand carbon dynamics: optimizing age-dependent density management for Larix principis-rupprechtii plantations in semi-humid to semiarid regions. Journal of Forestry Research</p>
-								<center><h4>2025</h4></center>
-								<p style="font-size: 70%;">- Wolkovich EM, Ettinger AK, Chin A, Chamberlain CJ, Baumgarten F, Pradhan K, Manzanedo RD, Hille Ris Lambers J. Why longer seasons with climate change may not increase tree growth. Nature Climate Change</p>
-								<p style="font-size: 70%;">- Vitali V, Jevsenak J, Fonti M, Manzanedo RD, Walthert L, von Arx G, Holloway-Phillips M, Treydte K, Zweifel R, Saurer M. Disentangling Soil and Atmospheric Drought Effects with
-									Intra-Annual δ¹³C Patterns in Tree Rings. Tree Physiology.</p>
-								<p style="font-size: 70%;">- Zuidema P, the Tropical Tree-Ring Network (including Manzanedo RD). In Press. Pantropical tree rings show small effects of drought on stem growth. Science</p>
-								<p style="font-size: 70%;">- Liao J, Zhang X, Chen X, Du M, Zheng J, Wu Y, Li W, & Manzanedo RD. In Press. Slope gradient mediates age-depended radial growth and drought resistance of planted larch trees along elevation gradients. Forest Ecosystems </p>
-								<p style="font-size: 70%;">- Chin AR, Gessler A, Guzmán-Delgado P, Manzanedo RD, Saurer M, Hille Ris Lambers J. 2025. Rainwater uptake in conifer twigs: Five experiments tell a story of absorption, storage, and transport. Journal of Experimental Botany</p>
-								<p style="font-size: 70%;">- Groenendijk P, the Tropical Tree-Ring Network (including Manzanedo RD). The importance of tropical tree-ring chronologies for global change research. Quaternary Science Reviews</p>
-								<center><h4>2024</h4></center>
-								<p style="font-size: 70%;">- Manzanedo RD, Chin AR, Ettinger A, Pederson N, Pradan K, Guiterman CCH, Su J, Baumgarten F, & Hille Ris Lambers J. Moving Ecological Tree-Ring Big Data Forwards: Limitations, Data Integration, and Multidisciplinarity. STOTEN</p>
-								<p style="font-size: 70%;">-  Su, J, Gou X, Hille Ris Lambers, J, Zhang DD, Zheng W, Xie M, & Manzanedo RD. 2024. Increasing ENSO variability synchronizes tree growth in subtropical forests. Agricultural and Forest Meteorology, 345: 109830.</p>
-								<p style="font-size: 70%;">-	Visakorpi K, Manzanedo RD, Görlich A, Schiendorfer K, Altermatt Bieger AA, Gates E, Hille Ris Lambers J. 2023. Leaf-level resistance to frost, drought and heat covaries across European temperate tree seedlings. Journal of Ecology, 112: 559-574.</p>
-								<p style="font-size: 70%;">- Zhang X, Manzanedo RD, Xu G, & Lapenas AG. Achieving Sustainable Development Goal 13: Resilience and Adaptive Capacity of Temperate and Boreal Forests Under Climate Change. Frontiers in Forests and Global Change 7: 1356686.</p>
-								<center><h4>2023</h4></center>
-								<p style="font-size: 70%;">- Zhang X, Rademacher T, Liu H, Wang L, & Manzanedo RD. 2023. Fading regulation of diurnal temperature ranges on drought-induced growth loss for drought-tolerant tree species. Nature Communications: 14, 6916.</p>
-								<p style="font-size: 70%;">-	Li W, Manzanedo RD, Jian Y, Ma W, Du E, Zhao S, Rademacher T, Dong M, Xu H, Kang X, Wang J, Cui X, & Pederson N. 2023. Reassessment of growth-climate relations indicates the potential for decline across Eurasian boreal larch forests. Nature Communications: 14, 3358.</p>
-								<p style="font-size: 70%;">- Cao Z, Zhang J, Gou X, Wang Y, Sun Q, Yang J, Manzanedo RD, & Pederson N. 2023. Increasing forest carbon sinks in cold and arid northeastern Tibetan Plateau. Science of the Total Environment. 905: 167168.</p>
+      <li class="person reveal">
+        <div class="person__portrait--initials" aria-hidden="true">CH</div>
+        <h3>Cecilia Hofmann</h3>
+        <span class="role">PhD student, WSL</span>
+        <p>Cecilia's PhD asks how climate change alters the physiological performance of European mountain tree species. Combining tree-ring isotope analysis with experiments along elevational gradients, she identifies species-specific thresholds to support climate-adaptive forest management. <a href="https://www.oeschger.unibe.ch/about_us/people/personalpage/index_eng.html?id=943">Profile</a>.</p>
+      </li>
 
-								<center><a href="https://scholar.google.com/citations?hl=es&user=Fg6tKWQAAAAJ"> FIND ALL PREVIOUS WORK HERE</a></center>
-								<br />
+      <li class="person reveal">
+        <div class="person__portrait--initials" aria-hidden="true">NB</div>
+        <h3>Nora Bisang</h3>
+        <span class="role">MSc student</span>
+        <p>Nora's thesis investigates how climate-change responses vary among dominant European tree species, comparing climate vulnerability across populations and examining how competition and local context shape responses to rising climate stress.</p>
+      </li>
 
-								<br />
-								
-								
+      <li class="person reveal">
+        <div class="person__portrait--initials" aria-hidden="true">PM</div>
+        <h3>Patricia Martínez Soler</h3>
+        <span class="role">BSc student</span>
+        <p>Patricia's thesis explores the links between biodiversity, ecosystem stability and site characteristics, focusing on understorey vegetation and age-class variability, to sharpen the link between ecological traits and forest resilience.</p>
+      </li>
 
-							</div>
-						</section>
-						</section>
-						
-						<section class="spotlight">
-							<div class="image"><img src="images/pic03.jpg" alt="" /></div><div class="content">
-								<h2>TEACHING<br />
-								</h2>
-								<p>The group members participate in the following courses at the University of Bern</p>
-								<p>Ecology Across Scales (2025-)</p>
-								<p>Advanced Plant Biology: Community Ecology (2024-) </p>
-								<p>The Importance of Biodiversity for Sustainability (2024-) </p>
-								<p>Colloquium in Plant Sciences (2024-) </p>
-								<p>Writing Science (2026-) </p>
+      <li class="person reveal">
+        <div class="person__portrait--initials" aria-hidden="true">MT</div>
+        <h3>Matteo Trachsel</h3>
+        <span class="role">BSc student</span>
+        <p>Matteo's thesis looks at patterns of heavy-metal deposition recorded within tree rings across Switzerland.</p>
+      </li>
+    </ul>
 
-								<p>The group coordinated and tought the following courses at ETH-Zürich:</p>
-								<p>- Quantitative Approaches to Plant Population and Community Ecology (2021-now)</p>
-								<p>- Practicum in Unweltbiologie (Module on seed predation) (2021-now)</p>
-								<p>- Ecology and Evolution: Term Paper and Seminar</p>
-								<p>- Guest lectures at "Advanced Ecological Processes" (2022 and 2023) and "Plant Ecology" (2022) </p>
-							</div>
-						</section>
-					</section>
+    <div class="alumni reveal">
+      <span class="eyebrow">Former members</span>
+      <ul>
+        <li>
+          <strong>Savannah Goetsch</strong>
+          <span class="years">MSc · 2024–2025</span>
+          <p style="margin-top:.4rem">Explored the regeneration niche of the main Swiss tree species using repeated Swiss NFI inventory data, in collaboration with WSL.</p>
+        </li>
+        <li>
+          <strong>Giacomo Colasurdo</strong>
+          <span class="years">Visiting student, University of Milan · 2024</span>
+          <p style="margin-top:.4rem">Worked on the collection and analysis of ecological metadata for forest responses to climate change.</p>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
 
-				
+<!-- ============================ RESEARCH ============================ -->
+<section class="band band--dark deferred" id="research">
+  <div class="wrap">
+    <div class="section-head section-head--center reveal">
+      <span class="eyebrow">Current work</span>
+      <h2>Research</h2>
+      <p>Four lines the group is running right now. Earlier work is listed under publications.</p>
+    </div>
 
+    <ul class="projects">
+      <li class="project reveal">
+        <figure class="project__figure"><img src="images/pic12.jpg" alt="Tree-ring cores prepared for measurement" loading="lazy" decoding="async"></figure>
+        <div class="project__text">
+          <svg class="project__icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+            <circle cx="16" cy="16" r="14"/><circle cx="16" cy="16" r="10"/><circle cx="16" cy="16" r="6"/><circle cx="16" cy="16" r="2"/>
+          </svg>
+          <h3>Big long-term ecological data</h3>
+          <p>An ERC Starting project, now transferred to an SNSF Starting Grant, aimed at improving the representativity and availability of long-term tree-growth data across European forest populations.</p>
+          <p>Started in September 2024, it builds on our <a href="https://onlinelibrary.wiley.com/doi/abs/10.1111/jbi.13488">work</a> harmonising the largest dendrochronological databases and developing methods to reduce their biases over time.</p>
+          <a class="link-out" href="https://www.sciencedirect.com/science/article/abs/pii/S0048969724074011">Most recent paper</a>
+        </div>
+      </li>
 
+      <li class="project reveal">
+        <figure class="project__figure"><img src="images/pic06.jpg" alt="Tree seedlings on the forest floor" loading="lazy" decoding="async"></figure>
+        <div class="project__text">
+          <svg class="project__icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" aria-hidden="true">
+            <path d="M16 29V13"/><path d="M16 17c0-5 4-9 9-9 0 5-4 9-9 9Z"/><path d="M16 22c0-4-3-7-7-7 0 4 3 7 7 7Z"/>
+          </svg>
+          <h3>The regeneration niche</h3>
+          <p>How do trees change their environmental requirements as they grow, and what does that mean for how forest populations respond to climate change?</p>
+          <p>See the <a href="https://besjournals.onlinelibrary.wiley.com/doi/full/10.1111/1365-2745.14254">work</a> led by Kristiina Visakorpi on trade-offs between tolerance to multiple extremes, comparing modelled and experimental tolerances across European tree species.</p>
+          <p>Manzanedo et al. systematically model the habitat of 42 species across 30 years of Swiss inventory data to test how general ontogenetic niche shifts really are.</p>
+        </div>
+        <div class="project__strip">
+          <img src="images/pic07.jpg" alt="Modelled species distribution output" loading="lazy" decoding="async">
+          <img src="images/pic11.jpg" alt="Growing-season analysis figure" loading="lazy" decoding="async">
+        </div>
+      </li>
 
+      <li class="project reveal">
+        <figure class="project__figure"><img src="images/pic08.jpg" alt="Alpine wildflower meadow in bloom" loading="lazy" decoding="async"></figure>
+        <div class="project__text">
+          <svg class="project__icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" aria-hidden="true">
+            <path d="M6 27h20"/><path d="M11 27c0-6 2-11 5-14 3 3 5 8 5 14"/><circle cx="16" cy="7" r="3"/>
+          </svg>
+          <h3>Alpine phenology</h3>
+          <p>How does the phenology of alpine flower communities respond to a warmer climate, and how does that change the ecosystem services they provide — including the experience of visiting a protected area?</p>
+          <p>See our <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8976009/">work</a> using citizen-science data from Mount Rainier National Park, part of the long-running <a href="http://www.meadowatch.org/">MeadoWatch</a> project led by Prof. Janneke Hille Ris Lambers.</p>
+        </div>
+        <div class="project__strip">
+          <img src="images/Combined.png" alt="Phenology analysis figure" loading="lazy" decoding="async">
+          <img src="images/pic09.jpg" alt="Boreal larch forest" loading="lazy" decoding="async">
+        </div>
+      </li>
 
+      <li class="project reveal">
+        <figure class="project__figure"><img src="images/pic10.jpg" alt="Growth-climate analysis in a boreal forest" loading="lazy" decoding="async"></figure>
+        <div class="project__text">
+          <svg class="project__icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" aria-hidden="true">
+            <circle cx="16" cy="16" r="13"/><path d="M16 8v8l6 3"/>
+          </svg>
+          <h3>Tree phenology and climate change</h3>
+          <p>Will earlier growing seasons change how forests respond to climate? Does a longer season compensate for rising temperature and aridity?</p>
+          <p>The <a href="https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2018JG004882">work</a> led by Xianliang Zhang opened this line: warming promotes boreal forest growth, but likely only temporarily, turning negative as permafrost degrades.</p>
+          <p>More recently, the <a href="https://www.nature.com/articles/s41467-023-39057-5">study</a> led by Wenqing Li found far greater drought sensitivity than expected once shifting growing seasons are accounted for. The Grephon team, led by Lizzie Wolkovich, is working on a review harmonising what we know.</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
 
-			</div>
+<!-- ============================ PUBLICATIONS ============================ -->
+<section class="deferred" id="publications">
+  <div class="spotlight spotlight--flip spotlight--paper">
+    <div class="spotlight__media">
+      <img src="images/pic02.jpg" alt="Forest canopy" loading="lazy" decoding="async">
+    </div>
+    <div class="spotlight__body reveal">
+      <span class="eyebrow">Selected output</span>
+      <h2>Publications</h2>
+      <p style="margin-top:1rem;color:var(--ink-soft)">A highlighted selection. The full list is on Google Scholar.</p>
+    </div>
+  </div>
 
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.scrollex.min.js"></script>
-			<script src="assets/js/jquery.scrolly.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
+  <div class="band band--tint">
+    <div class="wrap pubs reveal">
+      <div class="pubs__year"><h3>2026</h3></div>
+      <ul>
+        <li>Su J, Zheng W, Gou X, Hille Ris Lambers J, Altman J, Wang Y, Chu C, Zuidema P, Gu F &amp; <span class="self">Manzanedo RD</span>. Bedrock lithology determines forest demographic responses to drought. <span class="journal">Nature Communications</span>.<span class="status">Accepted</span></li>
+        <li><span class="self">Manzanedo RD</span>, Visakorpi K, Bieger A, Temperli C, Portier J, Goetsch S &amp; Hille Ris Lambers J. High climatic niche stability across life stages in Swiss forest tree species. <span class="journal">Journal of Ecology</span>.<span class="status">Accepted</span></li>
+        <li>Hille Ris Lambers J, Bektas B, Torres A, <span class="self">Manzanedo RD</span> &amp; Feeley K. Elevational range shifts of trees in response to a changing climate. <span class="journal">Annual Review of Ecology, Evolution and Systematics</span>.<span class="status">Accepted</span></li>
+        <li>Wu Y, Rademacher T, Liu H, <span class="self">Manzanedo RD</span>, Lian B, Yu S, Guo Z, Du M &amp; Zhang X. Balancing individual growth and stand carbon dynamics: optimizing age-dependent density management for <em>Larix principis-rupprechtii</em> plantations in semi-humid to semi-arid regions. <span class="journal">Journal of Forestry Research</span>.</li>
+      </ul>
 
-	</body>
+      <div class="pubs__year"><h3>2025</h3></div>
+      <ul>
+        <li>Wolkovich EM, Ettinger AK, Chin A, Chamberlain CJ, Baumgarten F, Pradhan K, <span class="self">Manzanedo RD</span> &amp; Hille Ris Lambers J. Why longer seasons with climate change may not increase tree growth. <span class="journal">Nature Climate Change</span>.</li>
+        <li>Vitali V, Jevšenak J, Fonti M, <span class="self">Manzanedo RD</span>, Walthert L, von Arx G, Holloway-Phillips M, Treydte K, Zweifel R &amp; Saurer M. Disentangling soil and atmospheric drought effects with intra-annual δ¹³C patterns in tree rings. <span class="journal">Tree Physiology</span>.</li>
+        <li>Zuidema P &amp; the Tropical Tree-Ring Network (incl. <span class="self">Manzanedo RD</span>). Pantropical tree rings show small effects of drought on stem growth. <span class="journal">Science</span>.<span class="status">In press</span></li>
+        <li>Liao J, Zhang X, Chen X, Du M, Zheng J, Wu Y, Li W &amp; <span class="self">Manzanedo RD</span>. Slope gradient mediates age-dependent radial growth and drought resistance of planted larch along elevation gradients. <span class="journal">Forest Ecosystems</span>.<span class="status">In press</span></li>
+        <li>Chin AR, Gessler A, Guzmán-Delgado P, <span class="self">Manzanedo RD</span>, Saurer M &amp; Hille Ris Lambers J. Rainwater uptake in conifer twigs: five experiments tell a story of absorption, storage and transport. <span class="journal">Journal of Experimental Botany</span>.</li>
+        <li>Groenendijk P &amp; the Tropical Tree-Ring Network (incl. <span class="self">Manzanedo RD</span>). The importance of tropical tree-ring chronologies for global change research. <span class="journal">Quaternary Science Reviews</span>.</li>
+      </ul>
+
+      <div class="pubs__year"><h3>2024</h3></div>
+      <ul>
+        <li><span class="self">Manzanedo RD</span>, Chin AR, Ettinger A, Pederson N, Pradhan K, Guiterman CH, Su J, Baumgarten F &amp; Hille Ris Lambers J. Moving ecological tree-ring big data forwards: limitations, data integration and multidisciplinarity. <span class="journal">Science of the Total Environment</span>.</li>
+        <li>Su J, Gou X, Hille Ris Lambers J, Zhang DD, Zheng W, Xie M &amp; <span class="self">Manzanedo RD</span>. Increasing ENSO variability synchronizes tree growth in subtropical forests. <span class="journal">Agricultural and Forest Meteorology</span> 345: 109830.</li>
+        <li>Visakorpi K, <span class="self">Manzanedo RD</span>, Görlich A, Schiendorfer K, Altermatt Bieger AA, Gates E &amp; Hille Ris Lambers J. Leaf-level resistance to frost, drought and heat covaries across European temperate tree seedlings. <span class="journal">Journal of Ecology</span> 112: 559–574.</li>
+        <li>Zhang X, <span class="self">Manzanedo RD</span>, Xu G &amp; Lapenas AG. Achieving Sustainable Development Goal 13: resilience and adaptive capacity of temperate and boreal forests under climate change. <span class="journal">Frontiers in Forests and Global Change</span> 7: 1356686.</li>
+      </ul>
+
+      <div class="pubs__year"><h3>2023</h3></div>
+      <ul>
+        <li>Zhang X, Rademacher T, Liu H, Wang L &amp; <span class="self">Manzanedo RD</span>. Fading regulation of diurnal temperature ranges on drought-induced growth loss for drought-tolerant tree species. <span class="journal">Nature Communications</span> 14: 6916.</li>
+        <li>Li W, <span class="self">Manzanedo RD</span>, Jian Y, Ma W, Du E, Zhao S, Rademacher T, Dong M, Xu H, Kang X, Wang J, Cui X &amp; Pederson N. Reassessment of growth–climate relations indicates the potential for decline across Eurasian boreal larch forests. <span class="journal">Nature Communications</span> 14: 3358.</li>
+        <li>Cao Z, Zhang J, Gou X, Wang Y, Sun Q, Yang J, <span class="self">Manzanedo RD</span> &amp; Pederson N. Increasing forest carbon sinks in the cold and arid northeastern Tibetan Plateau. <span class="journal">Science of the Total Environment</span> 905: 167168.</li>
+      </ul>
+
+      <p style="margin-top:2.5rem">
+        <a class="link-out" href="https://scholar.google.com/citations?hl=es&amp;user=Fg6tKWQAAAAJ">See the complete publication list on Google Scholar</a>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ TEACHING ============================ -->
+<section class="deferred" id="teaching">
+  <div class="spotlight spotlight--ink">
+    <div class="spotlight__media">
+      <img src="images/pic03.jpg" alt="Fieldwork in a mountain forest" loading="lazy" decoding="async">
+    </div>
+    <div class="spotlight__body teaching reveal">
+      <span class="eyebrow">In the classroom</span>
+      <h2 style="margin-bottom:1.6rem">Teaching</h2>
+
+      <h3>University of Bern</h3>
+      <ul>
+        <li><span>Ecology Across Scales</span><span class="years">2025–</span></li>
+        <li><span>Advanced Plant Biology: Community Ecology</span><span class="years">2024–</span></li>
+        <li><span>The Importance of Biodiversity for Sustainability</span><span class="years">2024–</span></li>
+        <li><span>Colloquium in Plant Sciences</span><span class="years">2024–</span></li>
+        <li><span>Writing Science</span><span class="years">2026–</span></li>
+      </ul>
+
+      <h3>ETH Zürich</h3>
+      <ul>
+        <li><span>Quantitative Approaches to Plant Population and Community Ecology</span><span class="years">2021–</span></li>
+        <li><span>Praktikum in Umweltbiologie — seed predation module</span><span class="years">2021–</span></li>
+        <li><span>Ecology and Evolution: Term Paper and Seminar</span><span class="years"></span></li>
+        <li><span>Guest lectures, Advanced Ecological Processes</span><span class="years">2022, 2023</span></li>
+        <li><span>Guest lecture, Plant Ecology</span><span class="years">2022</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============================ FOOTER ============================ -->
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <h4>Forest Ecology Lab</h4>
+        <p>Institute of Plant Sciences<br>University of Bern<br>Altenbergrain 21, 3013 Bern, Switzerland</p>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <p><a href="mailto:ruben.manzanedo@unibe.ch">ruben.manzanedo@unibe.ch</a></p>
+        <p><a href="https://scholar.google.com/citations?hl=es&amp;user=Fg6tKWQAAAAJ">Google Scholar</a></p>
+        <p><a href="https://www.ips.unibe.ch/">Institute of Plant Sciences</a></p>
+      </div>
+      <div>
+        <h4>Join us</h4>
+        <p>A postdoc position is currently open.<br><a href="images/Postdoc%20Position%20Bern.pdf">See the flyer</a></p>
+      </div>
+      <div>
+        <img src="images/unibelogo.png" alt="University of Bern" loading="lazy" decoding="async" width="755" height="582">
+      </div>
+    </div>
+    <div class="colophon">
+      <span>© <span id="year">2026</span> Forest Ecology Lab, University of Bern</span>
+      <span>Last updated August 2026</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  var toggle = document.getElementById('navToggle');
+  var nav = document.getElementById('primaryNav');
+
+  toggle.addEventListener('click', function () {
+    var open = nav.getAttribute('data-open') === 'true';
+    nav.setAttribute('data-open', String(!open));
+    toggle.setAttribute('aria-expanded', String(!open));
+    toggle.setAttribute('aria-label', open ? 'Open menu' : 'Close menu');
+  });
+
+  nav.addEventListener('click', function (e) {
+    if (e.target.tagName === 'A') {
+      nav.setAttribute('data-open', 'false');
+      toggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  var unload = function () { document.body.classList.remove('is-preload'); };
+  window.addEventListener('load', function () { setTimeout(unload, 100); });
+  setTimeout(unload, 3000);
+
+  var header = document.getElementById('siteHeader');
+  new IntersectionObserver(function (entries) {
+    header.classList.toggle('is-stuck', !entries[0].isIntersecting);
+  }, { rootMargin: '-70px 0px 0px 0px' }).observe(document.getElementById('home'));
+
+  /* Fade-in. Failsafe: everything is shown after 2s no matter what. */
+  var items = document.querySelectorAll('.reveal');
+  var showAll = function () { items.forEach(function (el) { el.classList.add('in'); }); };
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) {
+    showAll();
+  } else {
+    var revealer = new IntersectionObserver(function (entries, obs) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) { entry.target.classList.add('in'); obs.unobserve(entry.target); }
+      });
+    }, { rootMargin: '0px 0px -5% 0px', threshold: 0.02 });
+    items.forEach(function (el) { revealer.observe(el); });
+    setTimeout(showAll, 2000);
+  }
+
+  var links = {};
+  document.querySelectorAll('.nav a[href^="#"]').forEach(function (a) {
+    links[a.getAttribute('href').slice(1)] = a;
+  });
+  var spy = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      var link = links[entry.target.id];
+      if (link && entry.isIntersecting) {
+        Object.keys(links).forEach(function (k) { links[k].removeAttribute('aria-current'); });
+        link.setAttribute('aria-current', 'true');
+      }
+    });
+  }, { rootMargin: '-45% 0px -50% 0px' });
+  Object.keys(links).forEach(function (id) {
+    var s = document.getElementById(id);
+    if (s) spy.observe(s);
+  });
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+})();
+</script>
+
+</body>
 </html>
