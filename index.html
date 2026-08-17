@@ -16,7 +16,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
 
-<script>document.documentElement.className += ' js';</script>
+<script>document.documentElement.className += ' js is-preload';</script>
 
 <style>
 /* ============================================================
@@ -49,7 +49,7 @@
 *,*::before,*::after{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
 body{
-  margin:0;background:var(--paper);color:var(--ink);
+  margin:0;background:var(--paper);color:var(--ink);overflow-wrap:break-word;
   font-family:var(--f-body);
   font-size:clamp(1rem,.96rem + .2vw,1.075rem);line-height:1.65;letter-spacing:.075em;
   -webkit-font-smoothing:antialiased;
@@ -112,7 +112,7 @@ p:last-child{margin-bottom:0}
 
 @media (max-width:920px){
   .brand{opacity:1}
-  .nav-toggle{display:block}
+  .nav-toggle{display:block;padding:.6rem;margin-right:-.6rem}
   .nav{
     position:absolute;top:calc(var(--header-h) - 8px);right:0;
     background:var(--paper-2);border:1px solid var(--rule);border-radius:10px;
@@ -120,7 +120,7 @@ p:last-child{margin-bottom:0}
   }
   .nav[data-open="true"]{display:block}
   .nav ul{flex-direction:column;gap:0}
-  .nav a{display:block;padding:.62rem 1.1rem;color:var(--ink-soft)}
+  .nav a{display:block;padding:.8rem 1.2rem;color:var(--ink-soft)}
   .nav a::after{display:none}
 }
 
@@ -131,7 +131,7 @@ p:last-child{margin-bottom:0}
    ============================================================ */
 .banner{
   position:relative;display:flex;flex-direction:column;justify-content:center;
-  height:100svh;min-height:35em;overflow:hidden;cursor:default;
+  height:100vh;height:100svh;min-height:35em;overflow:hidden;cursor:default;
   text-align:center;color:#fff;background:var(--ink);
   padding:var(--header-h) var(--pad) 0;
 }
@@ -199,8 +199,15 @@ p:last-child{margin-bottom:0}
 .is-preload .banner__more{transform:translateY(8.5em);opacity:0}
 
 @media (max-width:736px){
-  .banner{height:auto;min-height:0;padding:9em 2em 5em}
+  .banner{height:auto;min-height:78svh;padding:7.5em 1.5em 4em}
   .banner__more{display:none}
+  .banner h1{letter-spacing:.14em;padding:.4em .7em .5em;margin-bottom:1.2rem}
+  .banner__logo{width:min(180px,46vw);margin-bottom:1.4rem}
+  .banner__sub{letter-spacing:.16em}
+  .banner__unibe{width:96px}
+}
+@media (max-width:400px){
+  .banner h1{letter-spacing:.1em;font-size:1.28rem}
 }
 
 /* ============================================================
@@ -292,7 +299,7 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 10px)}
 /* ============================================================
    PEOPLE
    ============================================================ */
-.people{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:clamp(1.75rem,3vw,2.75rem);list-style:none;margin:0;padding:0}
+.people{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(255px,100%),1fr));gap:clamp(1.75rem,3vw,2.75rem);list-style:none;margin:0;padding:0}
 .person__portrait,.person__portrait--initials{width:148px;aspect-ratio:1;border-radius:50%}
 .person__portrait{object-fit:cover;box-shadow:0 0 0 1px var(--rule),0 0 0 8px var(--paper),0 0 0 9px rgba(33,178,166,.4)}
 .person__portrait--initials{
@@ -305,7 +312,7 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 10px)}
 .person p{font-size:.94rem;color:var(--ink-soft)}
 
 .alumni{margin-top:clamp(2.75rem,5vw,4rem);padding-top:2rem;border-top:1px solid var(--rule)}
-.alumni ul{list-style:none;margin:1.25rem 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.5rem}
+.alumni ul{list-style:none;margin:1.25rem 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),1fr));gap:1.5rem}
 .alumni li{font-size:.94rem;color:var(--ink-soft)}
 .alumni strong{color:var(--ink);display:block;font-family:var(--f-display);font-size:1.02rem;font-weight:600}
 .alumni .years{font-family:var(--f-label);font-size:.72rem;color:var(--amber);letter-spacing:.05em}
@@ -313,7 +320,7 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 10px)}
 /* ============================================================
    RESEARCH
    ============================================================ */
-.projects{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:clamp(1.75rem,3vw,2.5rem);list-style:none;margin:0;padding:0}
+.projects{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(340px,100%),1fr));gap:clamp(1.75rem,3vw,2.5rem);list-style:none;margin:0;padding:0}
 .project{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);border-radius:6px;overflow:hidden;display:flex;flex-direction:column}
 .project__figure{margin:0;position:relative}
 .project__figure img{width:100%;aspect-ratio:16/9;object-fit:cover}
@@ -345,14 +352,14 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 10px)}
 .teaching h3{margin-bottom:.9rem}
 .teaching h3 + h3{margin-top:2rem}
 .teaching ul{list-style:none;margin:0;padding:0}
-.teaching li{padding:.55rem 0;border-bottom:1px solid rgba(255,255,255,.16);display:flex;justify-content:space-between;gap:1.5rem;font-size:.95rem}
+.teaching li{padding:.55rem 0;border-bottom:1px solid rgba(255,255,255,.16);display:flex;flex-wrap:wrap;justify-content:space-between;gap:.15rem 1.5rem;font-size:.95rem}
 .teaching .years{font-family:var(--f-label);font-size:.75rem;color:var(--amber-lift);white-space:nowrap;padding-top:.15rem}
 
 /* ============================================================
    FOOTER
    ============================================================ */
 .site-footer{background:var(--ink);color:rgba(255,255,255,.72);padding-block:clamp(3rem,6vw,4.5rem) 2rem;font-size:.9rem}
-.footer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:2.5rem;align-items:start}
+.footer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(230px,100%),1fr));gap:2.5rem;align-items:start}
 .site-footer h4{color:var(--paper);font-family:var(--f-label);font-size:.74rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;margin-bottom:1rem}
 .site-footer a{color:var(--amber-lift)}
 .site-footer img{width:96px;height:auto;opacity:.85}
@@ -363,9 +370,25 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 10px)}
    ============================================================ */
 .js .reveal{opacity:0}
 .js .reveal.in{opacity:1;transition:opacity .55s ease}
+
+/* Spotlights converge: the photo enters from one edge, the text from the
+   other, alternating section to section the way the layout alternates. */
+.js .slide-l,.js .slide-r{opacity:0;will-change:transform,opacity}
+.js .slide-l{transform:translateX(-3rem)}
+.js .slide-r{transform:translateX(3rem)}
+.js .slide-l.in,.js .slide-r.in{
+  opacity:1;transform:none;
+  transition:opacity .85s ease,transform .85s cubic-bezier(.22,.61,.36,1);
+}
+.js .spotlight__body.in{transition-delay:.18s}   /* photo leads, text follows */
+
+/* Research cards deal in one after another */
+.js .projects > li.in:nth-child(2){transition-delay:.12s}
+.js .projects > li.in:nth-child(3){transition-delay:.24s}
+.js .projects > li.in:nth-child(4){transition-delay:.36s}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
-  .js .reveal{opacity:1;transition:none}
+  .js .reveal,.js .slide-l,.js .slide-r{opacity:1;transform:none!important;transition:none}
   .banner::after{opacity:0!important;transition:none}
   .banner h1,.banner__logo,.banner__more{opacity:1!important;transform:none!important;transition:none}
   .banner h1::before,.banner h1::after{width:100%!important;transition:none}
@@ -381,7 +404,7 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 10px)}
 </style>
 </head>
 
-<body class="is-preload">
+<body>
 
 <header class="site-header" id="siteHeader">
   <div class="wrap">
@@ -433,10 +456,10 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 10px)}
 <!-- ============================ ABOUT ============================ -->
 <section id="about">
   <div class="spotlight spotlight--green">
-    <div class="spotlight__media">
+    <div class="spotlight__media slide-l">
       <img src="images/Group_picture.jpeg" alt="Members of the Forest Ecology Lab together in the field" loading="lazy" decoding="async">
     </div>
-    <div class="spotlight__body reveal">
+    <div class="spotlight__body slide-r">
       <span class="eyebrow">Welcome</span>
       <h2>A lab built around long-term forest data</h2>
       <p style="margin-top:1.4rem">
@@ -699,10 +722,10 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 10px)}
 <!-- ============================ PUBLICATIONS ============================ -->
 <section class="deferred" id="publications">
   <div class="spotlight spotlight--flip spotlight--paper">
-    <div class="spotlight__media">
+    <div class="spotlight__media slide-r">
       <img src="images/pic02.jpg" alt="Forest canopy" loading="lazy" decoding="async">
     </div>
-    <div class="spotlight__body reveal">
+    <div class="spotlight__body slide-l">
       <span class="eyebrow">Selected output</span>
       <h2>Publications</h2>
       <p style="margin-top:1rem;color:var(--ink-soft)">A highlighted selection. The full list is on Google Scholar.</p>
@@ -754,10 +777,10 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 10px)}
 <!-- ============================ TEACHING ============================ -->
 <section class="deferred" id="teaching">
   <div class="spotlight spotlight--ink">
-    <div class="spotlight__media">
+    <div class="spotlight__media slide-l">
       <img src="images/pic03.jpg" alt="Fieldwork in a mountain forest" loading="lazy" decoding="async">
     </div>
-    <div class="spotlight__body teaching reveal">
+    <div class="spotlight__body teaching slide-r">
       <span class="eyebrow">In the classroom</span>
       <h2 style="margin-bottom:1.6rem">Teaching</h2>
 
@@ -814,6 +837,18 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 10px)}
 </footer>
 
 <script>
+/* Banner reveal — isolated on purpose: if anything below fails,
+   the banner must still uncover itself. */
+(function () {
+  var root = document.documentElement;
+  var go = function () { root.classList.remove('is-preload'); };
+  if (document.readyState === 'complete') { setTimeout(go, 80); }
+  else { window.addEventListener('load', function () { setTimeout(go, 80); }); }
+  setTimeout(go, 3000);   // failsafe: never stay hidden
+})();
+</script>
+
+<script>
 (function () {
   'use strict';
 
@@ -834,17 +869,13 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 10px)}
     }
   });
 
-  var unload = function () { document.body.classList.remove('is-preload'); };
-  window.addEventListener('load', function () { setTimeout(unload, 100); });
-  setTimeout(unload, 3000);
-
   var header = document.getElementById('siteHeader');
   new IntersectionObserver(function (entries) {
     header.classList.toggle('is-stuck', !entries[0].isIntersecting);
   }, { rootMargin: '-70px 0px 0px 0px' }).observe(document.getElementById('home'));
 
   /* Fade-in. Failsafe: everything is shown after 2s no matter what. */
-  var items = document.querySelectorAll('.reveal');
+  var items = document.querySelectorAll('.reveal, .slide-l, .slide-r');
   var showAll = function () { items.forEach(function (el) { el.classList.add('in'); }); };
 
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) {
